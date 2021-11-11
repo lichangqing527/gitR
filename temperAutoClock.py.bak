@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-#cron: 30 7 * * *
 import json
 import random
 import time
