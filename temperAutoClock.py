@@ -114,7 +114,7 @@ else:
 
 #位置参数
 logs = logs + '位置模拟 √ \nlat:' + str(lat) + ' lng:' + str(
-    lng) + '\n' + address + province + city + district + street + '\n'
+    lng) + '\n' + province + city + district + street + '\n'
 
 title = "体温打卡通知"
 url = "http://pushplus.hxtrip.com/send"
