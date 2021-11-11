@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 #cron: 30 7 * * *
-#gitR/temperAutoClock123
+#项目名称: gitR/temperAutoClock123
 import json
 import random
 import time
