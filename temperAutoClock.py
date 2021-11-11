@@ -60,7 +60,7 @@ for i in range(len(Authorizationtmp)):
     html = requests.get(url, headers=headers)
     html = json.loads(html.text)
     if '成功' not in html:
-        logs = logs + "异常 " + html
+        logs = logs + "异常 " + str(html)
         break
     xh = html.get("data").get("XueQi")
 
