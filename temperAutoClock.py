@@ -59,7 +59,7 @@ for i in range(len(Authorizationtmp)):
                'Accept-Encoding': 'gzip, deflate, br'}
     html = requests.get(url, headers=headers)
     html = json.loads(html.text)
-    if 'XueQi' not in html:
+    if 'XueQi' not in str(html):
         logs = logs + "异常 " + str(html)
         continue
     xh = html.get("data").get("XueQi")
