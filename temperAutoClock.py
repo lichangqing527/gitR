@@ -59,6 +59,9 @@ for i in range(len(Authorizationtmp)):
                'Accept-Encoding': 'gzip, deflate, br'}
     html = requests.get(url, headers=headers)
     html = json.loads(html.text)
+    if '成功' not in html:
+        logs = logs + "异常 " + html
+        break
     xh = html.get("data").get("XueQi")
 
     biztime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
