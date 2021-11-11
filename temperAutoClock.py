@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # cron: 30 7 * * *
-# 项目名称: gitR/temperAutoClock123
+
 import json
 import random
 import time
@@ -24,6 +24,24 @@ if "PUSH_PLUS_TOKEN" in os.environ and os.environ["PUSH_PLUS_TOKEN"]:
 
 logs = ""
 
+lat = round(random.uniform(28.75267, 28.75443), 5)
+lng = round(random.uniform(115.85025, 115.85419), 5)
+url = 'https://apis.map.qq.com/ws/geocoder/v1/?coord_type=5&get_poi=0&output=json&key=JJRBZ-DW2RQ-M2F5M-GDBDP-WEKUZ-RTFE5&location=' + str(
+    lat) + '%2C' + str(lng)
+headers = {'Host': 'apis.map.qq.com', 'Connection': 'keep-alive',
+           'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
+           'content-type': 'application/json',
+           'Referer': 'https://servicewechat.com/wx91da385bdd520809/145/page-frame.html',
+           'Accept-Encoding': 'gzip, deflate, br'}
+
+html = requests.get(url, headers=headers)
+html = json.loads(html.text)
+address = html.get("result").get("address")
+province = html.get("result").get("address_component").get("province")
+city = html.get("result").get("address_component").get("city")
+district = html.get("result").get("address_component").get("district")
+street = html.get("result").get("address_component").get("street")
+
 url = 'https://xsgzgl.zxhnzq.com/api/EducationAPI/GetDqXqInfo?isrefresh=true&scode=10410&sccode=1041001'
 headers = {'Host': 'xsgzgl.zxhnzq.com', 'Connection': 'keep-alive',
            'Authorization': Authorization,
@@ -37,9 +55,9 @@ xh = html.get("data").get("XueQi")
 
 biztime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 url = 'https://xsgzgl.zxhnzq.com/api/PositionInfo/AddOrEditPosition'
-data = {"usercode": "20191799", "xq": xh, "typeid": 5, "remark": "体温打卡", "biztime": biztime, "lat": 28.68202,
-        "lng": 115.85794, "address": "江西省南昌市红谷滩区世贸路144号(红谷滩区南昌市人民政府(世贸路))", "province": "江西省", "city": "南昌市",
-        "district": "红谷滩区", "street": "世贸路", "scode": "10410", "sccode": "1041001"}
+data = {"usercode": "20191799", "xq": xh, "typeid": 5, "remark": "体温打卡", "biztime": biztime, "lat": lat,
+        "lng": lng, "address": address, "province": province, "city": city,
+        "district": district, "street": street, "scode": "10410", "sccode": "1041001"}
 data = json.dumps(data)
 html = requests.post(url, headers=headers, data=data)  # 发送获取位置id的请求
 html = json.loads(html.text)
@@ -90,9 +108,13 @@ html = requests.post(url, headers=headers, data=data)  # 发送体温登记请�
 
 html = json.loads(html.text)
 if html.get("code") == 200:
-    logs = logs + '体温登记 √ '
+    logs = logs + '体温登记 √ \n'
 else:
-    logs = logs + '体温登记 × ' + html.get("msg")
+    logs = logs + '体温登记 × ' + html.get("msg") + '\n'
+
+#位置参数
+logs = logs + '位置模拟 √ \nlat:' + str(lat) + ' lng:' + str(
+    lng) + '\n' + address + province + city + district + street + '\n'
 
 title = "体温打卡通知"
 url = "http://pushplus.hxtrip.com/send"
@@ -103,6 +125,8 @@ data = {
     'template': ''
 }
 data = json.dumps(data)
+
+
 r = requests.post('http://pushplus.hxtrip.com/send', data).text
 
 print(logs)
@@ -114,5 +138,3 @@ else:
         print("推送成功")
     else:
         print("推送失败")
-
-
