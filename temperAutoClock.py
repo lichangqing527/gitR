@@ -31,6 +31,7 @@ else:Authorizationtmp = ''
 logs = ""
 
 for i in range(len(Authorizationtmp)):
+    time.sleep(random.randint(1, 60))
     Authorization = 'Bearer ' + Authorizationtmp[i]
     lat = round(random.uniform(28.75267, 28.75443), 5)
     lng = round(random.uniform(115.85025, 115.85419), 5)
