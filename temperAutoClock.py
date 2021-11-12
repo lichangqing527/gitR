@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
+# Author:Cq
 # cron: 30 7 * * *
-
+# version:1.0
+# Date:2021/11/12 10:06
 import json
 import random
 import time
@@ -13,7 +15,7 @@ root_path = os.path.split(cur_path)[0]
 sys.path.append(root_path)
 
 # 初始化变量
-topic=''
+topic = ''
 token = ''  # pushplustoken
 Authorizationtmp = ''
 
@@ -27,7 +29,8 @@ if "PUSH_PLUS_USER" in os.environ and os.environ["PUSH_PLUS_USER"]:
 
 if len(Authorizationtmp) != 0:
     Authorizationtmp = Authorizationtmp.split("&")
-else:Authorizationtmp = ''
+else:
+    Authorizationtmp = ''
 logs = ""
 
 for i in range(len(Authorizationtmp)):
@@ -94,7 +97,7 @@ for i in range(len(Authorizationtmp)):
     html = json.loads(html.text)
     xh = html.get("data").get("student_Dormitory").get("xh")
     if html.get("code") == 200:
-        logs = logs + '学号获取 √ '  + xh + '\n'
+        logs = logs + '学号获取 √ ' + xh + '\n'
     else:
         logs = logs + '学号获取 × ' + html.get("msg") + '\n'
         print(logs)
@@ -128,19 +131,16 @@ for i in range(len(Authorizationtmp)):
     logs = logs + '位置模拟 √ \nlat:' + str(lat) + ' lng:' + str(
         lng) + '\n' + province + city + district + street + '\n\n'
 
-
-
 title = "体温打卡通知"
 url = "http://pushplus.hxtrip.com/send"
 data = {
-    'topic':topic,
+    'topic': topic,
     'token': token,
     'title': title,
     'content': logs,
     'template': 'txt'
 }
 data = json.dumps(data)
-
 
 r = requests.post('http://pushplus.hxtrip.com/send', data).text
 
