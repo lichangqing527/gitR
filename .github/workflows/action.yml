@@ -6,7 +6,7 @@ on:
     - cron: '0 23 * * *'
 
 runs-on: ubuntu-latest
-    steps:
+steps:
     - name: Checkout #拉代码
       uses: actions/checkout@master
     - name: Set up Python #安装python
