@@ -11,8 +11,5 @@ steps:
       uses: actions/checkout@master
     - name: Set up Python #安装python
       uses: actions/setup-python@v1
-        with:
-        python-version: 3.8
     - name: Run scrpt
-      run: |
-        python3 temperAutoClock.py
+      run: python3 temperAutoClock.py
