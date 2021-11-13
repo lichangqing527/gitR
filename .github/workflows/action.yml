@@ -1,5 +1,5 @@
 name: AutoTemperUpload
- 
+
 on:
   push:
   schedule:
@@ -7,10 +7,13 @@ on:
 
 job:
   runs-on: ubuntu-latest
+  if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
   steps:
       - name: Checkout #拉代码
         uses: actions/checkout@master
+
       - name: Set up Python #安装python
         uses: actions/setup-python@v1
+
       - name: Run scrpt
-        run: python3 temperAutoClock.py
+        run: python3 temperAutoClock.py "${{ secrets.WXKEY }}" "${{ secrets.PPKEY }}"

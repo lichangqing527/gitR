@@ -33,6 +33,9 @@ else:
     Authorizationtmp = ''
 logs = ""
 
+WX_key = sys.argv[1]
+PUSH_PLUS_TOKEN = sys.argv[2]
+
 for i in range(len(Authorizationtmp)):
     time.sleep(random.randint(1, 60))
     Authorization = 'Bearer ' + Authorizationtmp[i]
@@ -153,3 +156,11 @@ else:
         print("推送成功")
     else:
         print("推送失败")
+
+def ppsend(PUSH_PLUS_TOKEN, logs):
+    pp_url = 'https://www.pushplus.plus/send?token={}&title=自动体温打卡脚本&content={}&template=html'.format(PUSH_PLUS_TOKEN, logs)
+    if '请求成功' in pp_url:
+        print("推送成功")
+    else:
+        print("推送失败")
+        
