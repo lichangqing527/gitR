@@ -25,4 +25,4 @@ jobs:
           run: python3 temperAutoClock.py 
           env: 
             WX_KEY: ${{ secrets.WXKEY }}
-            PUSH_PLUS_TOKEN: ${{ secrets.PPKEY }}"
+            PUSH_PLUS_TOKEN: ${{ secrets.PPKEY }}
