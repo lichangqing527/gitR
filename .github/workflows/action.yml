@@ -16,5 +16,8 @@ jobs:
         - name: Set up Python #安装python
           uses: actions/setup-python@v1
 
+        - name: Install requirements #安装轮子
+        run: pip install -r requirements.txt
+
         - name: Run scrpt
           run: python3 temperAutoClock.py "${{ secrets.WXKEY }}" "${{ secrets.PPKEY }}"
