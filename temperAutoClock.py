@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # Author:Cq
-# cron: 30 7 * * *
-# version:1.0
+# cron: 0 7 * * *
+# version:1.0.1
 # Date:2021/11/12 10:06
 import json
 import random
