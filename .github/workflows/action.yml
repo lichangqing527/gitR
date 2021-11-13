@@ -22,4 +22,7 @@ jobs:
           run: pip install -r requirements.txt
 
         - name: Run scrpt
-          run: python3 temperAutoClock.py "${{ secrets.WXKEY }}" "${{ secrets.PPKEY }}"
+          run: python3 temperAutoClock.py 
+          env: 
+            WX_KEY: ${{ secrets.WXKEY }}
+            PUSH_PLUS_TOKEN: ${{ secrets.PPKEY }}"
