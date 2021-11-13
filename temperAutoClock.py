@@ -33,8 +33,8 @@ else:
     Authorizationtmp = ''
 logs = ""
 
-WX_key = sys.argv[1]
-PUSH_PLUS_TOKEN = sys.argv[2]
+# WX_key = sys.argv[1]
+# PUSH_PLUS_TOKEN = sys.argv[2]
 
 for i in range(len(Authorizationtmp)):
     time.sleep(random.randint(1, 60))
