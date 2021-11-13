@@ -1,0 +1,28 @@
+name: AutoTemperUpload
+
+on:
+  push:
+  schedule:
+    - cron: '0 23 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
+    steps:
+        - name: Checkout #拉代码
+          uses: actions/checkout@master
+
+        - name: Set up Python #安装python
+          uses: actions/setup-python@v1
+          with:
+            python-version: 3.8
+
+        - name: Install requirements #安装轮子
+          run: pip install -r requirements.txt
+
+        - name: Run scrpt
+          run: python3 temperAutoClock.py 
+          env: 
+            WX_KEY: ${{ secrets.WXKEY }}
+            PUSH_PLUS_TOKEN: ${{ secrets.PPKEY }}

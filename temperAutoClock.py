@@ -33,6 +33,7 @@ else:
     Authorizationtmp = ''
 logs = ""
 
+
 for i in range(len(Authorizationtmp)):
     time.sleep(random.randint(1, 60))
     Authorization = 'Bearer ' + Authorizationtmp[i]
@@ -97,7 +98,7 @@ for i in range(len(Authorizationtmp)):
     html = json.loads(html.text)
     xh = html.get("data").get("student_Dormitory").get("xh")
     if html.get("code") == 200:
-        logs = logs + '学号获取 √ ' + xh + '\n'
+        logs = logs + '学号获取 √ ' + '****' + xh[-2:] + '\n'
     else:
         logs = logs + '学号获取 × ' + html.get("msg") + '\n'
         print(logs)
@@ -127,9 +128,6 @@ for i in range(len(Authorizationtmp)):
     else:
         logs = logs + '体温登记 × ' + html.get("msg") + '\n'
 
-    # 位置参数
-    logs = logs + '位置模拟 √ \nlat:' + str(lat) + ' lng:' + str(
-        lng) + '\n' + province + city + district + street + '\n\n'
 
 title = "体温打卡通知"
 url = "http://pushplus.hxtrip.com/send"
@@ -153,3 +151,4 @@ else:
         print("推送成功")
     else:
         print("推送失败")
+
