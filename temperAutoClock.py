@@ -37,8 +37,10 @@ logs = ""
 for i in range(len(Authorizationtmp)):
     time.sleep(random.randint(1, 60))
     Authorization = 'Bearer ' + Authorizationtmp[i]
-    lat = round(random.uniform(28.75267, 28.75443), 5)
-    lng = round(random.uniform(115.85025, 115.85419), 5)
+    # lat = round(random.uniform(28.75267, 28.75443), 5)
+    # lng = round(random.uniform(115.85025, 115.85419), 5)
+    lng = 115.36777
+    lat = 28.42595
     url = 'https://apis.map.qq.com/ws/geocoder/v1/?coord_type=5&get_poi=0&output=json&key=JJRBZ-DW2RQ-M2F5M-GDBDP-WEKUZ-RTFE5&location=' + str(
         lat) + '%2C' + str(lng)
     headers = {'Host': 'apis.map.qq.com', 'Connection': 'keep-alive',
