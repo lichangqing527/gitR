@@ -39,6 +39,7 @@ for i in range(len(Authorizationtmp)):
     Authorization = 'Bearer ' + Authorizationtmp[i]
     # lat = round(random.uniform(28.75267, 28.75443), 5)
     # lng = round(random.uniform(115.85025, 115.85419), 5)
+    #二月十九删除
     lng = 115.36777
     lat = 28.42595
     url = 'https://apis.map.qq.com/ws/geocoder/v1/?coord_type=5&get_poi=0&output=json&key=JJRBZ-DW2RQ-M2F5M-GDBDP-WEKUZ-RTFE5&location=' + str(
