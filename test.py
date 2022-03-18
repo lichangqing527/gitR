@@ -205,4 +205,4 @@ def post_tg(message):
     else:
         print("Telegram Error")
 
-post_tg(data)
+post_tg(r)
