@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Author:Cq
-# cron: 30 7 * * *
+# cron: 15 7 * * *
 # version:1.0
 # Date:2022/03/18 09:10
 import json

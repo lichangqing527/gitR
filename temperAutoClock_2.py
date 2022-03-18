@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Author:Cq
-# cron: 0 17 * * *
+# cron: 15 16 * * *
 # version:1.0
 # Date:2022/03/17 17:06
 import json
@@ -185,7 +185,7 @@ else:
         print("推送成功")
     else:
         print("推送失败")
-        
+
 def post_tg(message):
     telegram_message = f"{message}"
 
