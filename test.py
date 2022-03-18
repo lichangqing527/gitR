@@ -9,7 +9,6 @@ import time
 import requests
 import sys
 import os
-from requests import post
 
 cur_path = os.path.abspath(os.path.dirname(__file__))
 root_path = os.path.split(cur_path)[0]
@@ -189,20 +188,22 @@ else:
 
 def post_tg(message):
     telegram_message = f"{message}"
-               
-    params = (
-        ('userid', userid),
-        ('text', telegram_message),
-        ('parse_mode', "NULL"), #可选Html或Markdown
-        ('disable_web_page_preview', "yes")
-    )    
     telegram_url = "https://api.telegram.org/bot" + bottoken + "/sendMessage"
-    telegram_req = post(telegram_url, params=params)
-    telegram_status = telegram_req.status_code
+    telegram_req = requests.post(telegram_url, params=params)
+    telegram_status = telegram_req.status_code          
+
+    params = (
+        ('chat_id', userid),
+        ('text', telegram_message),
+        ('parse_mode', "html"), #可选Html或Markdown
+        ('disable_web_page_preview', "yes")
+    )   
+
     if telegram_status == 200:
         print(f"INFO: Telegram Message sent")
     else:
+        print(telegram_req)
         print(telegram_status)
         print("Telegram Error")
 
-post_tg(r)
+post_tg(logs)
