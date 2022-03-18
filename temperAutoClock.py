@@ -37,7 +37,7 @@ if len(Authorizationtmp) != 0:
     Authorizationtmp = Authorizationtmp.split("&")
 else:
     Authorizationtmp = ''
-logs = ""
+logs = "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 
 for i in range(len(Authorizationtmp)):

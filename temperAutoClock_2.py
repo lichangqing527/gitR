@@ -38,7 +38,7 @@ if len(Authorizationtmp) != 0:
     Authorizationtmp = Authorizationtmp.split("&")
 else:
     Authorizationtmp = ''
-logs = ""
+logs = "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 # 农大
 # location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
@@ -125,7 +125,7 @@ for i in range(len(Authorizationtmp)):
     html = json.loads(html.text)
     xh = html.get("data").get("student_Dormitory").get("xh")
     if html.get("code") == 200:
-        logs = logs + '学号获取 √ ' + xh + '\n'
+        logs = logs + '学号获取 √ ' + '****' + xh[-2:] + '\n'
     else:
         logs = logs + '学号获取 × ' + html.get("msg") + '\n'
         print(logs)
