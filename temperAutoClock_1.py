@@ -9,6 +9,7 @@ import time
 import requests
 import sys
 import os
+from requests import post
 
 cur_path = os.path.abspath(os.path.dirname(__file__))
 root_path = os.path.split(cur_path)[0]
@@ -18,6 +19,8 @@ sys.path.append(root_path)
 topic = ''
 token = ''  # pushplustoken
 Authorizationtmp = ''
+bottoken = ''
+userid = ''
 
 # 变量赋值
 if "WX_KEY" in os.environ and os.environ["WX_KEY"]:
@@ -26,6 +29,11 @@ if "PUSH_PLUS_TOKEN" in os.environ and os.environ["PUSH_PLUS_TOKEN"]:
     token = os.environ["PUSH_PLUS_TOKEN"]
 if "PUSH_PLUS_USER" in os.environ and os.environ["PUSH_PLUS_USER"]:
     topic = os.environ["PUSH_PLUS_USER"]
+if "TG_BOT_TOKEN" in os.environ and os.environ["TG_BOT_TOKEN"]:
+    bottoken = os.environ["TG_BOT_TOKEN"]
+if "TG_USER_ID" in os.environ and os.environ["TG_USER_ID"]:
+    userid = os.environ["TG_USER_ID"]
+
 topic = ''
 if len(Authorizationtmp) != 0:
     Authorizationtmp = Authorizationtmp.split("&")
@@ -178,3 +186,20 @@ else:
         print("推送成功")
     else:
         print("推送失败")
+
+def post_tg(message):
+    telegram_message = f"{message}"
+               
+    params = (
+        ('userid', userid),
+        ('text', telegram_message),
+        ('parse_mode', "Markdown"), #可选Html或Markdown
+        ('disable_web_page_preview', "yes")
+    )    
+    telegram_url = "https://api.telegram.org/bot" + bottoken + "/sendMessage"
+    telegram_req = post(telegram_url, params=params)
+    telegram_status = telegram_req.status_code
+    if telegram_status == 200:
+        print(f"INFO: Telegram Message sent")
+    else:
+        print("Telegram Error")
