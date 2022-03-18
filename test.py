@@ -201,8 +201,8 @@ def post_tg(message):
     telegram_status = telegram_req.status_code
     if telegram_status == 200:
         print(f"INFO: Telegram Message sent")
-        print(telegram_status)
     else:
+        print(telegram_status)
         print("Telegram Error")
 
 post_tg(r)
