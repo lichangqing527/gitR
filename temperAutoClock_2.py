@@ -38,7 +38,7 @@ if len(Authorizationtmp) != 0:
     Authorizationtmp = Authorizationtmp.split("&")
 else:
     Authorizationtmp = ''
-logs = "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+logs = "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 
 # 农大
 # location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
