@@ -203,3 +203,5 @@ def post_tg(message):
         print(f"INFO: Telegram Message sent")
     else:
         print("Telegram Error")
+
+post_tg(data)
