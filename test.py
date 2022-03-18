@@ -193,7 +193,7 @@ def post_tg(message):
     params = (
         ('userid', userid),
         ('text', telegram_message),
-        ('parse_mode', "Markdown"), #可选Html或Markdown
+        ('parse_mode', "NULL"), #可选Html或Markdown
         ('disable_web_page_preview', "yes")
     )    
     telegram_url = "https://api.telegram.org/bot" + bottoken + "/sendMessage"
