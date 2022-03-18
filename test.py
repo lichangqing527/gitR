@@ -188,7 +188,6 @@ else:
 
 def post_tg(message):
     telegram_message = f"{message}"
-         
 
     params = (
         ('chat_id', userid),
@@ -200,12 +199,12 @@ def post_tg(message):
     telegram_url = "https://api.telegram.org/bot" + bottoken + "/sendMessage"
     telegram_req = requests.post(telegram_url, params=params)
     telegram_status = telegram_req.status_code  
-       
+
     if telegram_status == 200:
-        print(f"INFO: Telegram Message sent")
+        print(f"tg推送成功")
     else:
-        print(telegram_req)
-        print(telegram_status)
-        print("Telegram Error")
+        # print(telegram_req) 出问题再取消注释
+        # print(telegram_status)
+        print("tg推送失败")
 
 post_tg(logs)
