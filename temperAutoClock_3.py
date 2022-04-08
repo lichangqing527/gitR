@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 # Author:Cq
-# cron: 0 17 * * *
+# cron: 20 11 * * *
 # version:1.0
-# Date:2022/03/17 17:06
+# Date:2022/04/8 16:18
 import json
 import random
 import time
