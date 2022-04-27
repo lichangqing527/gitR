@@ -123,7 +123,7 @@ for i in range(len(Authorizationtmp)):
 
     html = requests.get(url, headers=headers)
     html = json.loads(html.text)
-    xh = html.get("data").get("student_Dormitory").get("xh")
+    xh = html.get("data").get("xh")
     if html.get("code") == 200:
         logs = logs + '学号获取 √ ' + xh + '\n'
     else:
