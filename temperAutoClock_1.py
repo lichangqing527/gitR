@@ -207,4 +207,5 @@ def post_tg(message):
         # print(telegram_status)
         print("tg推送失败")
 
-post_tg(logs)
+if(bottoken != ''):
+    post_tg(logs)
