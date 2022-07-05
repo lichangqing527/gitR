@@ -40,10 +40,6 @@ else:
     Authorizationtmp = ''
 logs = "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 
-# 农大
-# location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
-# location_lng.append(round(random.uniform(115.85025, 115.85419), 5))
-
 #龙岗传习教育
 #22.704582,114.255385
 #22.704389,114.255953
@@ -86,27 +82,6 @@ for i in range(len(Authorizationtmp)):
     district = html.get("result").get("address_component").get("district")
     street = html.get("result").get("address_component").get("street")
 
-    #学号获取
-    url = 'https://xsgzgl.zxhnzq.com/api/ScancodeRegister/GetMyScanCode?scode=10410&sccode=1041001'
-    headers = {'Host': 'xsgzgl.zxhnzq.com', 'Connection': 'keep-alive',
-               'Authorization': Authorization,
-               'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
-               'content-type': 'application/json', 'env': 'production', 'positionID': str(positionID),
-               'terminal': 'miniprogram',
-               'version': '2.0.44', 'Referer': 'https://servicewechat.com/wx91da385bdd520809/145/page-frame.html',
-               'Accept-Encoding': 'gzip, deflate, br'}
-
-    html = requests.get(url, headers=headers)
-    html = json.loads(html.text)
-    xh = html.get("data").get("xh")
-    if html.get("code") == 200:
-        logs = logs + '学号获取 √ ' + '****' + xh[-2:] + '\n'
-    else:
-        logs = logs + '学号获取 × ' + html.get("msg") + '\n'
-        print(logs)
-        exit(0)
-        
-    #学期获取
     url = 'https://xsgzgl.zxhnzq.com/api/EducationAPI/GetDqXqInfo?isrefresh=true&scode=10410&sccode=1041001'
     headers = {'Host': 'xsgzgl.zxhnzq.com', 'Connection': 'keep-alive',
                'Authorization': Authorization,
@@ -119,11 +94,11 @@ for i in range(len(Authorizationtmp)):
     if 'XueQi' not in str(html):
         logs = logs + "异常 " + str(html)
         continue
-    xq = html.get("data").get("XueQi")
+    xh = html.get("data").get("XueQi")
 
     biztime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     url = 'https://xsgzgl.zxhnzq.com/api/PositionInfo/AddOrEditPosition'
-    data = {"usercode": xh, "xq": xq, "typeid": 5, "remark": "体温打卡", "biztime": biztime, "lat": lat,
+    data = {"usercode": "20191799", "xq": xh, "typeid": 5, "remark": "体温打卡", "biztime": biztime, "lat": lat,
             "lng": lng, "address": address, "province": province, "city": city,
             "district": district, "street": street, "scode": "10410", "sccode": "1041001"}
     data = json.dumps(data)
@@ -137,6 +112,24 @@ for i in range(len(Authorizationtmp)):
         print(logs)
         exit(0)
 
+    url = 'https://xsgzgl.zxhnzq.com/api/ScancodeRegister/GetMyScanCode?scode=10410&sccode=1041001'
+    headers = {'Host': 'xsgzgl.zxhnzq.com', 'Connection': 'keep-alive',
+               'Authorization': Authorization,
+               'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat',
+               'content-type': 'application/json', 'env': 'production', 'positionID': str(positionID),
+               'terminal': 'miniprogram',
+               'version': '2.0.44', 'Referer': 'https://servicewechat.com/wx91da385bdd520809/145/page-frame.html',
+               'Accept-Encoding': 'gzip, deflate, br'}
+
+    html = requests.get(url, headers=headers)
+    html = json.loads(html.text)
+    xh = html.get("data").get("xh")
+    if html.get("code") == 200:
+        logs = logs + '学号获取 √ ' + xh + '\n'
+    else:
+        logs = logs + '学号获取 × ' + html.get("msg") + '\n'
+        print(logs)
+        exit(0)
 
     # 时间格式转换
     registerdate = time.time() - 60 * 60 * 8
