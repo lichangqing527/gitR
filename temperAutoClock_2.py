@@ -40,26 +40,26 @@ else:
     Authorizationtmp = ''
 logs = "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 
-#龙岗传习教育
-#22.704582,114.255385
-#22.704389,114.255953
+# 农大
+# location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
+# location_lng.append(round(random.uniform(115.85025, 115.85419), 5))
 
 location_lat = []
 location_lng = []
 # 第一个 罗坑
-location_lat.append(round(random.uniform(22.70438, 22.70458), 5))
+location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
 
-location_lng.append(round(random.uniform(114.25538, 114.25595), 5))
+location_lng.append(round(random.uniform(115.85025, 115.85419), 5))
 
 # 第二个 泰和碧桂园
-location_lat.append(round(random.uniform(22.70438, 22.70458), 5))
+location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
 
-location_lng.append(round(random.uniform(114.25538, 114.25595), 5))
+location_lng.append(round(random.uniform(115.85025, 115.85419), 5))
 
 # 第三个 童家 28.540699,118.075623  28.540447,118.076346
-location_lat.append(round(random.uniform(22.70438, 22.70458), 5))
+location_lat.append(round(random.uniform(28.75267, 28.75443), 5))
 
-location_lng.append(round(random.uniform(114.25538, 114.25595), 5))
+location_lng.append(round(random.uniform(115.85025, 115.85419), 5))
 
 for i in range(len(Authorizationtmp)):
     # time.sleep(random.randint(1, 60))
@@ -125,7 +125,7 @@ for i in range(len(Authorizationtmp)):
     html = json.loads(html.text)
     xh = html.get("data").get("xh")
     if html.get("code") == 200:
-        logs = logs + '学号获取 √ ' + xh + '\n'
+        logs = logs + '学号获取 √ ' + '****' + xh[-2:] + '\n'
     else:
         logs = logs + '学号获取 × ' + html.get("msg") + '\n'
         print(logs)
