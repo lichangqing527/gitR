@@ -28,6 +28,7 @@ if "PUSH_PLUS_TOKEN" in os.environ and os.environ["PUSH_PLUS_TOKEN"]:
     token = os.environ["PUSH_PLUS_TOKEN"]
 if "PUSH_PLUS_USER" in os.environ and os.environ["PUSH_PLUS_USER"]:
     topic = os.environ["PUSH_PLUS_USER"]
+    
 if "TG_BOT_TOKEN" in os.environ and os.environ["TG_BOT_TOKEN"]:
     bottoken = os.environ["TG_BOT_TOKEN"]
 if "TG_USER_ID" in os.environ and os.environ["TG_USER_ID"]:
@@ -207,4 +208,5 @@ def post_tg(message):
         # print(telegram_status)
         print("tg推送失败")
 
-post_tg(logs)
+if(bottoken != ''):
+    post_tg(logs)
