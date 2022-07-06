@@ -210,3 +210,4 @@ def post_tg(message):
     else:
         print("未填写bottoken , 取消TG推送")
 
+post_tg(logs)
