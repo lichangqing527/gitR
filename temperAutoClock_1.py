@@ -199,6 +199,7 @@ def post_tg(message):
     telegram_url = "https://api.telegram.org/bot" + bottoken + "/sendMessage"
     telegram_req = requests.post(telegram_url, params = params)
     telegram_status = telegram_req.status_code  
+    
     if telegram_status == 200:
         print("TG推送成功")
     else:
@@ -206,7 +207,7 @@ def post_tg(message):
         # print(telegram_status)
         print("TG推送失败")
 
-if (bottoken != "" & userid != ""):
+if (bottoken != "" and userid != ""):
     post_tg(logs)
 else:
     print("未填写bottoken和userid , 取消TG推送")

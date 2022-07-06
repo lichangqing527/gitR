@@ -201,8 +201,13 @@ def post_tg(message):
     telegram_status = telegram_req.status_code  
 
     if telegram_status == 200:
-        print(f"tg推送成功")
+        print("TG推送成功")
     else:
         # print(telegram_req) 出问题再取消注释
         # print(telegram_status)
-        print("tg推送失败")
+        print("TG推送失败")
+
+if (bottoken != "" and userid != ""):
+    post_tg(logs)
+else:
+    print("未填写bottoken和userid , 取消TG推送")
