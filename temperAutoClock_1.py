@@ -206,7 +206,7 @@ def post_tg(message):
         # print(telegram_status)
         print("TG推送失败")
 
-    if (bottoken != "" & userid != ""):
-        post_tg(logs)
-    else:
-        print("未填写bottoken和userid , 取消TG推送")
+if (bottoken != "" & userid != ""):
+    post_tg(logs)
+else:
+    print("未填写bottoken和userid , 取消TG推送")
