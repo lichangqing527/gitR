@@ -207,6 +207,3 @@ def post_tg(message):
         # print(telegram_req) 出问题再取消注释
         # print(telegram_status)
         print("tg推送失败")
-
-if(bottoken != ''):
-    post_tg(logs)
