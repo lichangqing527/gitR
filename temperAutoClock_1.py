@@ -27,7 +27,7 @@ if "WX_KEY" in os.environ and os.environ["WX_KEY"]:
 if "PUSH_PLUS_TOKEN" in os.environ and os.environ["PUSH_PLUS_TOKEN"]:
     token = os.environ["PUSH_PLUS_TOKEN"]
 if "PUSH_PLUS_USER" in os.environ and os.environ["PUSH_PLUS_USER"]:
-    topic = os.environ["PUSH_PLUS_GROUP"]
+    topic = os.environ["PUSH_PLUS_USER"]
 if "TG_BOT_TOKEN" in os.environ and os.environ["TG_BOT_TOKEN"]:
     bottoken = os.environ["TG_BOT_TOKEN"]
 if "TG_USER_ID" in os.environ and os.environ["TG_USER_ID"]:
