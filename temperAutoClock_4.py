@@ -281,7 +281,7 @@ class A:
             if result != 0:
                 flag += 1
         self.logs = "体温登记编号:" + str(temperId) + "\n" + self.logs
-        self.logs = str(flag)+"人成功打卡\n\n" + self.logs
+        self.logs = str(flag)+"人成功打卡\n" + "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + self.logs
         print(self.logs)
         self.send()
 
