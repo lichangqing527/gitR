@@ -139,7 +139,7 @@ class A:
 
         xh = html.get("data").get("xh")
         if html.get("code") == 200:
-            self.logs = self.logs + '学号获取 √ ' + xh + '\n'
+            self.logs = self.logs + '学号获取 √ ******' + xh[-2:] + '\n'
             return xh
         else:
             self.logs = self.logs + '学号获取 × ' + html.get("msg") + '\n'
