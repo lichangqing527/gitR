@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 # Author:Cq
-# cron:15 7 * * *
+# cron:15 7,14 * * *
 # version:1.1
-# Date:2022/07/13 16:18
+# Date:2022/09/7 19:19
 import json
 import random
 import time
@@ -161,7 +161,10 @@ class A:
             self.logs = self.logs + "异常 " + str(html)
             return 0
         else:
-            return html.get("data")[0].get("id")
+            temperIds = []
+            for temperId in html.get("data"):
+                temperIds.append(temperId.get("id"))
+            return temperIds
 
     ##############################
     def batch_sign(self, xh, positionID, temperId, token):
@@ -192,9 +195,9 @@ class A:
 
         html = json.loads(html.text)
         if html.get("code") == 200:
-            self.logs = self.logs + '体温登记 √ \n\n'
+            self.logs = self.logs + str(temperId) + ' 体温登记 √ \n\n'
         else:
-            self.logs = self.logs + '体温登记 × ' + html.get("msg") + '\n\n'
+            self.logs = self.logs + str(temperId) + ' 体温登记 × ' + html.get("msg") + '\n\n'
             return 0
 
     def pushplus(self):
@@ -248,6 +251,7 @@ class A:
             print("未填写bottoken和userid , 取消TG推送")
     # 多用户体温登记逻辑
     def run(self):
+
         flag = 0
         self.get_tokens()
         for i in range(len(self.Authorizationtmp)):
@@ -274,13 +278,18 @@ class A:
             positionId = self.get_locationInfo( self.Authorizationtmp[i], weizhi[0], weizhi[1], Xh, Xq)
             if positionId == 0:
                 return
-            temperId = self.get_tempId(self.Authorizationtmp[i])
-            if temperId == 0:
+            temperIds = self.get_tempId(self.Authorizationtmp[i])
+            if len(temperIds) == 0:
                 return
-            result = self.batch_sign(Xh, positionId, temperId, self.Authorizationtmp[i])
+            else:
+                self.logs = self.logs + '一共' + str(len(temperIds)) + '个\n'
+            result = 0
+            for temperId in temperIds:
+                result = 1 if self.batch_sign(Xh, positionId, temperId, self.Authorizationtmp[i]) == 1 or result == 1 else 0
+
             if result != 0:
                 flag += 1
-        self.logs = "体温登记编号:" + str(temperId) + "\n" + self.logs
+        # self.logs = "体温登记编号:" + str(temperIds) + "\n" + self.logs
         self.logs = str(flag)+"人成功打卡\n" + "现在是" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + self.logs
         print(self.logs)
         self.send()
