@@ -285,7 +285,7 @@ class A:
                 self.logs = self.logs + '一共' + str(len(temperIds)) + '个\n'
             result = 0
             for temperId in temperIds:
-                result = 1 if self.batch_sign(Xh, positionId, temperId, self.Authorizationtmp[i]) == 1 or result == 1 else 0
+                result = 1 if self.batch_sign(Xh, positionId, temperId, self.Authorizationtmp[i]) == 1 else result
 
             if result != 0:
                 flag += 1
