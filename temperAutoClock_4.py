@@ -272,16 +272,16 @@ class A:
                 weizhi = self.location[0].split(",")
             Xq = self.get_Xq(self.Authorizationtmp[i])
             if Xq == 0:
-                break
+                continue
             Xh = self.get_Xh(self.Authorizationtmp[i])
             if Xh == 0:
-                break
+                continue
             positionId = self.get_locationInfo( self.Authorizationtmp[i], weizhi[0], weizhi[1], Xh, Xq)
             if positionId == 0:
-                break
+                continue
             temperIds = self.get_tempId(self.Authorizationtmp[i])
             if len(temperIds) == 0:
-                break
+                continue
             else:
                 self.logs = self.logs + '一共' + str(len(temperIds)) + '个\n'
             result = 0
