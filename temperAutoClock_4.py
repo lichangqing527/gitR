@@ -196,6 +196,7 @@ class A:
         html = json.loads(html.text)
         if html.get("code") == 200:
             self.logs = self.logs + str(temperId) + ' 体温登记 √ \n\n'
+            return 1
         else:
             self.logs = self.logs + str(temperId) + ' 体温登记 × ' + html.get("msg") + '\n\n'
             return 0
@@ -271,21 +272,21 @@ class A:
                 weizhi = self.location[0].split(",")
             Xq = self.get_Xq(self.Authorizationtmp[i])
             if Xq == 0:
-                return
+                break
             Xh = self.get_Xh(self.Authorizationtmp[i])
             if Xh == 0:
-                return
+                break
             positionId = self.get_locationInfo( self.Authorizationtmp[i], weizhi[0], weizhi[1], Xh, Xq)
             if positionId == 0:
-                return
+                break
             temperIds = self.get_tempId(self.Authorizationtmp[i])
             if len(temperIds) == 0:
-                return
+                break
             else:
                 self.logs = self.logs + '一共' + str(len(temperIds)) + '个\n'
             result = 0
             for temperId in temperIds:
-                result = 1 if self.batch_sign(Xh, positionId, temperId, self.Authorizationtmp[i]) == 1 else result
+                result = 1 if self.batch_sign(Xh, positionId, temperId, self.Authorizationtmp[i]) != 0 else result
 
             if result != 0:
                 flag += 1
